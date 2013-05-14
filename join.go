@@ -14,4 +14,3 @@ func main() {
 	fmt.Println(strings.Join([]string{
 		"X", "Y"},":"))
 	
-}
