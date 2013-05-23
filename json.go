@@ -37,9 +37,15 @@ func prtKeys(f interface{}, level int) {
 	for k, n := range mymap {
 		_ = n
 		fmt.Println(level)
-		fmt.Println(strings.Repeat("   ", level) + k)
+		if level-1 < 0 {
+			fmt.Println(k)
+		} else {
+			fmt.Println(strings.Repeat(" ", level-1) + k)
+
+		}
 		level = level + 1
 		prtKeys(n, level)
+
 	}
 
 }
