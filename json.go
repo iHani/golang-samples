@@ -25,27 +25,33 @@ func jsonByte() []byte {
 
 }
 func prtKeys(f interface{}, level int) {
-	mymap, ok := f.(map[string]interface{})
-	if !ok {
-		//fmt.Println("mymap, ok := f.(map[string]interface{}) NOT OK")
-		level = level - 1
-		return
-	} else {
-		//fmt.Println(mymap["parent"])
-	}
 
-	for k, n := range mymap {
-		_ = n
-		fmt.Println(level)
-		if level-1 < 0 {
-			fmt.Println(k)
+	myvalue, ok := f.(string)
+	if ok {
+		fmt.Println("value: ", myvalue)
+	} else {
+		mymap, ok := f.(map[string]interface{})
+		if !ok {
+			//fmt.Println("mymap, ok := f.(map[string]interface{}) NOT OK")
+			level = level - 1
+			return
 		} else {
-			fmt.Println(strings.Repeat(" ", level-1) + k)
+			//fmt.Println(mymap["parent"])
+		}
+
+		for k, n := range mymap {
+			_ = n
+			fmt.Println(level)
+			if level-1 < 0 {
+				fmt.Println(k)
+			} else {
+				fmt.Println(strings.Repeat(" ", level-1) + k)
+
+			}
+			level = level + 1
+			prtKeys(n, level)
 
 		}
-		level = level + 1
-		prtKeys(n, level)
-
 	}
 
 }
