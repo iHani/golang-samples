@@ -16,6 +16,7 @@ func (self EndPt) IsProducer() bool {
 
 type Consumer struct {
 	_name string
+	a     string
 	EndPt
 }
 
@@ -25,6 +26,7 @@ func (self Consumer) IsConsumer() bool {
 
 type Producer struct {
 	_name string
+	a     string
 	EndPt
 }
 
@@ -39,6 +41,7 @@ func (self Producer) IsProducer() bool {
 
 func (e Consumer) dump() {
 	fmt.Println(e._name)
+	fmt.Println(e.a)
 	fmt.Println("isConsumer =", e.IsConsumer())
 	fmt.Println("isProducer =", e.IsProducer())
 	fmt.Println("")
@@ -47,9 +50,17 @@ func (e Consumer) dump() {
 
 func (e Producer) dump() {
 	fmt.Println(e._name)
+	fmt.Println(e.a)
 	fmt.Println("isConsumer =", e.IsConsumer())
 	fmt.Println("isProducer =", e.IsProducer())
 	fmt.Println("")
+}
+
+func (e *Consumer) change(str string) {
+	e.a = str
+}
+func (e *Producer) change(str string) {
+	e.a = str
 }
 
 func main() {
@@ -81,5 +92,10 @@ func main() {
 
 	p1.dump()
 	p2.dump()
+
+	c1.change("consumer value")
+	p1.change(("producer value"))
+	c1.dump()
+	p1.dump()
 
 }
